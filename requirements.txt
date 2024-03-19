@@ -1,0 +1,9 @@
+# requirements
+# Usage: pip install -r requirements.txt
+
+# Base ----------------------------------------
+ultralytics
+tk
+opencv-python
+pillow
+requests
