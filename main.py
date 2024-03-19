@@ -13,7 +13,7 @@ class detection:
         self.root.title("Pothole Detection")
 
         # Initialize YOLO model
-        self.model = YOLO("model\\runs\\segment\\v8n-80\\weights\\v8n-80.pt")
+        self.model = YOLO("model\\runs\\v8n-80\\weights\\v8n-80.pt")
 
         # Open the class list file using a relative path
         with open("model\\coco.txt", "r") as f:
@@ -23,20 +23,42 @@ class detection:
         self.video_label = tk.Label(root)
         self.video_label.pack()
 
+        # Create a button to start/stop the video feed
+        self.start_stop_button = tk.Button(root, text="Start Video", command=self.toggle_video)
+        self.start_stop_button.pack()
+
         # Set up video capture
         self.cap = cv2.VideoCapture(0)
+        self.video_on = False  # Flag to keep track of whether video is running or stopped
 
         # Initialize sequence number for naming cropped pothole images
         self.sequence_number = 1
 
         # Set directory to save cropped pothole images
-        self.save_dir = "model\\ResultPrediction"
+        self.save_dir = "model\\ResultPrediction"  # Replace to your own directory
 
         # Set directory to save coordinates
-        self.coordinates_dir = "model\\ResultLocation"
+        self.coordinates_dir = "model\\ResultLocation"  # Replace to your own directory
 
+    def toggle_video(self):
+        if self.video_on:
+            self.stop_video()
+            self.start_stop_button.configure(text="Start Video")
+        else:
+            self.start_video()
+            self.start_stop_button.configure(text="Stop Video")
+
+    def start_video(self):
+        self.video_on = True
         self.update_video()
 
+    def stop_video(self):
+        self.video_on = False
+
+    def __del__(self):
+        # Release any resources when the application is closed
+        if self.cap is not None:
+            self.cap.release()
 
     def get_wifi_location(self):
             # Function to get the MAC addresses of nearby WiFi networks
@@ -77,6 +99,9 @@ class detection:
                 return None, None
 
     def update_video(self):
+        if not self.video_on:
+            return
+        
         # Capture a frame from the camera
         ret, frame = self.cap.read()
         if not ret:
