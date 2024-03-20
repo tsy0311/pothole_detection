@@ -19,13 +19,21 @@ class detection:
         with open("model\\coco.txt", "r") as f:
             self.class_list = f.read().split("\n")
 
+        # Create a title label
+        self.title_label = tk.Label(root, text="Pothole Detection System", font=("Helvetica", 16, "bold"))
+        self.title_label.pack()
+
+        # Create a frame to contain video feed and buttons
+        self.frame = tk.Frame(root)
+        self.frame.pack(pady=10)
+
         # Create a label to display the video feed
-        self.video_label = tk.Label(root)
-        self.video_label.pack()
+        self.video_label = tk.Label(self.frame)
+        self.video_label.pack(side=tk.LEFT, padx=10)
 
         # Create a button to start/stop the video feed
-        self.start_stop_button = tk.Button(root, text="Start Video", command=self.toggle_video)
-        self.start_stop_button.pack()
+        self.start_stop_button = tk.Button(self.frame, text="Start Video", command=self.toggle_video)
+        self.start_stop_button.pack(side=tk.RIGHT, padx=10)
 
         # Set up video capture
         self.cap = cv2.VideoCapture(0)
@@ -54,6 +62,8 @@ class detection:
 
     def stop_video(self):
         self.video_on = False
+        self.root.after_cancel(self.update_video)
+
 
     def __del__(self):
         # Release any resources when the application is closed
@@ -163,16 +173,22 @@ class detection:
         self.root.after(1000, self.update_video)
 
     def show_video_frame(self, image):
+        # Resize image to fit the label size
+        width, height = 640, 480  # Specify desired width and height for the displayed frame
+        image = image.resize((width, height),Image.Resampling.LANCZOS)
+
         # Convert PIL Image to Tkinter PhotoImage
         imgtk = ImageTk.PhotoImage(image)
 
         # Update the video label with the new frame
         self.video_label.configure(image=imgtk)
-        self.video_label.imgtk = imgtk  # Set imgtk attribute to avoid garbage collection
+        self.video_label.image = imgtk  # Keep a reference to prevent garbage collection
 
         # Necessary to force update the label
         self.video_label.update_idletasks()
 
+        # Schedule the next update after 1000 milliseconds
+        self.root.after(2000, self.update_video)
     def __del__(self):
         # Release any resources when the application is closed
         if self.cap is not None:
