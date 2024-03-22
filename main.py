@@ -13,10 +13,10 @@ class detection:
         self.root.title("Pothole Detection")
 
         # Initialize YOLO model
-        self.model = YOLO("model\\runs\\v8n-80\\weights\\v8n-80.pt")
+        self.model = YOLO("path\\to\your\\model\weights\\v8n-80.pt")
 
         # Open the class list file using a relative path
-        with open("model\\coco.txt", "r") as f:
+        with open("path\\to\\your\\model\\coco.txt", "r") as f:
             self.class_list = f.read().split("\n")
 
         # Create a title label
@@ -43,10 +43,10 @@ class detection:
         self.sequence_number = 1
 
         # Set directory to save cropped pothole images
-        self.save_dir = "model\\ResultPrediction"  # Replace to your own directory
+        self.save_dir = "path\\to\\your\\model\\ResultPrediction"  # Replace to your own directory
 
         # Set directory to save coordinates
-        self.coordinates_dir = "model\\ResultLocation"  # Replace to your own directory
+        self.coordinates_dir = "path\\to\\your\\model\\ResultLocation"  # Replace to your own directory
 
     def toggle_video(self):
         if self.video_on:
