@@ -13,10 +13,10 @@ class detection:
         self.root.title("Pothole Detection")
 
         # Initialize YOLO model
-        self.model = YOLO("path\\to\your\\model\weights\\v8n-80.pt")
+        self.model = YOLO("model\\runs\\v8n-80\\weights\\v8n-80.pt")
 
         # Open the class list file using a relative path
-        with open("path\\to\\your\\model\\coco.txt", "r") as f:
+        with open("model\\coco.txt", "r") as f:
             self.class_list = f.read().split("\n")
 
         # Create a title label
@@ -43,10 +43,10 @@ class detection:
         self.sequence_number = 1
 
         # Set directory to save cropped pothole images
-        self.save_dir = "path\\to\\your\\model\\ResultPrediction"  # Replace to your own directory
+        self.save_dir = "model\\ResultPrediction"  # Replace to your own directory
 
         # Set directory to save coordinates
-        self.coordinates_dir = "path\\to\\your\\model\\ResultLocation"  # Replace to your own directory
+        self.coordinates_dir = "model\\ResultLocation"  # Replace to your own directoryzz
 
     def toggle_video(self):
         if self.video_on:
@@ -63,12 +63,6 @@ class detection:
     def stop_video(self):
         self.video_on = False
         self.root.after_cancel(self.update_video)
-
-
-    def __del__(self):
-        # Release any resources when the application is closed
-        if self.cap is not None:
-            self.cap.release()
 
     def get_wifi_location(self):
             # Function to get the MAC addresses of nearby WiFi networks
@@ -189,6 +183,7 @@ class detection:
 
         # Schedule the next update after 1000 milliseconds
         self.root.after(2000, self.update_video)
+        
     def __del__(self):
         # Release any resources when the application is closed
         if self.cap is not None:
