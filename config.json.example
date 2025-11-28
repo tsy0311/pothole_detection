@@ -1,0 +1,13 @@
+{
+  "model_path": "yolov8n-seg.pt",
+  "class_list_path": "coco.txt",
+  "save_dir": "ResultPrediction",
+  "coordinates_dir": "ResultLocation",
+  "google_api_key": "YOUR_GOOGLE_MAPS_API_KEY_HERE",
+  "confidence_threshold": 0.7,
+  "camera_index": 0,
+  "update_interval_ms": 33
+}
+
+
+
