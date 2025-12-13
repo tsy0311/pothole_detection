@@ -28,3 +28,6 @@ pyyaml>=6.0.3
 #   pip install --user --break-system-packages "numpy<2.0" --force-reinstall
 # The notebook (model.ipynb) includes automatic NumPy version management.
 # All packages are at their latest versions as of the last update.
+
+# PDF Processing ----------------------------------------
+PyPDF2>=3.0.1
