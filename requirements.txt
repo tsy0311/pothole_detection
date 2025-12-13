@@ -6,6 +6,8 @@ ultralytics>=8.3.233
 opencv-python>=4.12.0
 pillow>=12.0.0
 requests>=2.32.0
+tqdm>=4.66.0
+roboflow>=1.1.0
 
 # Data Science & Visualization ----------------------------------------
 numpy>=2.2.6
