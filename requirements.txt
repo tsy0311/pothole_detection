@@ -6,8 +6,6 @@ ultralytics>=8.3.233
 opencv-python>=4.12.0
 pillow>=12.0.0
 requests>=2.32.0
-tqdm>=4.66.0
-roboflow>=1.1.0
 
 # Data Science & Visualization ----------------------------------------
 numpy>=2.2.6
@@ -30,6 +28,3 @@ pyyaml>=6.0.3
 #   pip install --user --break-system-packages "numpy<2.0" --force-reinstall
 # The notebook (model.ipynb) includes automatic NumPy version management.
 # All packages are at their latest versions as of the last update.
-
-# PDF Processing ----------------------------------------
-PyPDF2>=3.0.1
