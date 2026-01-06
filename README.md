@@ -1,10 +1,10 @@
 # Pothole Detection System
 
-A real-time pothole detection application using YOLOv8 segmentation model with a Tkinter GUI interface. The system detects potholes from live camera feed, saves detected images, and records GPS coordinates using WiFi-based geolocation.
+A real-time pothole detection application using YOLOv10 segmentation model with a Tkinter GUI interface. The system detects potholes from live camera feed, saves detected images, and records GPS coordinates using WiFi-based geolocation.
 
 ## Features
 
-- Real-time pothole detection using YOLOv8 segmentation model
+- Real-time pothole detection using YOLOv10 segmentation model
 - Live video feed from webcam
 - Automatic saving of detected pothole images
 - GPS coordinate recording using Google Geolocation API
@@ -38,7 +38,7 @@ pip install -r requirements.txt
      - Configure save directories
 
 4. Ensure you have the model file:
-   - Place `yolov8n-seg.pt` in the project directory, or
+   - Place `yolov10n-seg.pt` in the project directory, or
    - Update `model_path` in `config.json` to point to your model file
 
 ## Usage
@@ -64,7 +64,7 @@ python main.py
 
 Edit `config.json` to customize:
 
-- `model_path`: Path to YOLOv8 model file
+- `model_path`: Path to YOLOv10 model file
 - `class_list_path`: Path to class names file (coco.txt)
 - `save_dir`: Directory for saving detected images
 - `coordinates_dir`: Directory for saving location data
@@ -97,7 +97,7 @@ pothole_detection/
 
 ## Notes
 
-- The application requires a trained YOLOv8 segmentation model
+- The application requires a trained YOLOv10 segmentation model
 - WiFi-based geolocation requires nearby WiFi access points
 - Google Maps API key is optional but recommended for accurate location
 - Camera permissions may be required on some systems

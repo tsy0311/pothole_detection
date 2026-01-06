@@ -13,6 +13,7 @@ pandas>=2.3.3
 matplotlib>=3.10.7
 seaborn>=0.13.2
 pyyaml>=6.0.3
+scipy>=1.4.1  # For sensor data preprocessing (signal processing, FFT)
 
 # Deep Learning (installed as ultralytics dependencies) -----------------
 # torch>=2.2.2

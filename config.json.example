@@ -1,5 +1,5 @@
 {
-  "model_path": "yolov8n-seg.pt",
+  "model_path": "yolov10n-seg.pt",
   "class_list_path": "coco.txt",
   "save_dir": "ResultPrediction",
   "coordinates_dir": "ResultLocation",

@@ -32,7 +32,7 @@ logger = logging.getLogger(__name__)
 
 
 class PotholeDetection:
-    """Pothole Detection Application using YOLOv8 and Tkinter GUI."""
+    """Pothole Detection Application using YOLOv10 and Tkinter GUI."""
     
     # Constants
     POTHOLE_CLASS_ID = 0
@@ -59,7 +59,7 @@ class PotholeDetection:
         self.config = self._load_config(config_path)
         
         # Initialize paths
-        self.model_path = self.config.get("model_path", "yolov8n-seg.pt")
+        self.model_path = self.config.get("model_path", "yolov10n-seg.pt")
         self.class_list_path = self.config.get("class_list_path", "coco.txt")
         self.save_dir = Path(self.config.get("save_dir", "ResultPrediction"))
         self.coordinates_dir = Path(self.config.get("coordinates_dir", "ResultLocation"))
@@ -121,7 +121,7 @@ class PotholeDetection:
     def _load_config(self, config_path: Optional[str]) -> dict:
         """Load configuration from JSON file or use defaults."""
         default_config = {
-            "model_path": "yolov8n-seg.pt",
+            "model_path": "yolov10n-seg.pt",
             "class_list_path": "coco.txt",
             "save_dir": "ResultPrediction",
             "coordinates_dir": "ResultLocation",

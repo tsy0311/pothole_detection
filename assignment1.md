@@ -4,9 +4,152 @@
 
 **Deep Learning Framework for Real-Time Pothole Detection, Severity Classification, and Collaborative Road Infrastructure Monitoring**
 
+---
+
+## **Table of Contents**
+
+1. [Abstract](#abstract)
+2. [Chapter 1: Introduction](#chapter-1-introduction)
+   - 1.1 Background of the Problem
+   - 1.2 Motivation
+   - 1.3 Research Problem Statement
+   - 1.4 Research Questions
+   - 1.5 Research Objectives
+   - 1.6 Hypothesis
+   - 1.7 Scope and Limitation of the Research Project
+   - 1.8 Significance of the Research Project
+3. [Chapter 2: Literature Review](#chapter-2-literature-review)
+   - 2.1 Introduction to Literature Review
+   - 2.2 Single-Modal Visual Detection Approaches
+     - 2.2.1 Deep Learning-Based Pothole Detection
+     - 2.2.2 YOLO Version Comparison: v8, v10, v11, and v12
+     - 2.2.3 Traditional Image Processing Approaches
+   - 2.3 Severity Classification in Road Infrastructure
+     - 2.3.1 Severity Assessment Methods
+   - 2.4 Real-Time Optimization for Mobile Deployment
+     - 2.4.1 Model Compression Techniques
+   - 2.5 Critical Analysis and Research Gaps
+     - 2.5.1 Summary of Current State
+     - 2.5.2 Identified Research Gaps
+   - 2.6 Literature Review Summary Table
+   - 2.7 Synthesis and Research Direction
+4. [Chapter 3: Research Methodology](#chapter-3-research-methodology)
+   - 3.1 Introduction to Research Design
+   - 3.2 Research Philosophy and Approach
+     - 3.2.1 Research Philosophy
+     - 3.2.2 Research Approach
+     - 3.2.3 Research Strategy
+   - 3.3 Research Methodology Framework
+     - 3.3.1 Overall Research Methodology
+     - 3.3.2 Alignment with Research Questions
+   - 3.4 Detailed Methods and Approaches
+     - 3.4.1 Data Collection Methods
+     - 3.4.2 Data Preparation and Preprocessing
+     - 3.4.3 Model Development Approach
+     - 3.4.4 Training Methodology
+     - 3.4.5 Optimization Methods
+   - 3.5 Methods and Instruments
+     - 3.5.1 Data Collection Instruments
+     - 3.5.2 Data Collection Environment
+     - 3.5.3 Sampling Strategy
+     - 3.5.4 Data Annotation and Labeling
+     - 3.5.5 Credibility and Authenticity of Data
+     - 3.5.6 Experimental Setup and Infrastructure
+   - 3.6 Data Analysis
+     - 3.6.1 Quantitative Performance Metrics
+     - 3.6.2 Comparative Analysis Methods
+     - 3.6.3 Statistical Analysis Methods
+     - 3.6.4 Data Analysis Tools and Software
+     - 3.6.5 Analysis Workflow
+   - 3.7 Challenges, Constraints, and Limitations
+     - 3.7.1 Technical Challenges
+     - 3.7.2 Resource Constraints
+     - 3.7.3 Methodological Limitations
+     - 3.7.4 Ethical and Practical Constraints
+     - 3.7.5 Risk Management and Contingency Plans
+   - 3.8 Expected Results and Outcome
+     - 3.8.1 Expected Research Outcomes
+     - 3.8.2 Expected Contributions
+     - 3.8.3 Implications of Results
+     - 3.8.4 Answering Research Questions
+5. [Chapter 4: References](#chapter-4-references)
+
+---
+
+## **List of Figures**
+
+**Figure 1:** System Architecture Overview ........................................................................... 104  
+**Figure 2:** YOLO Version Performance Comparison ........................................................... 311  
+**Figure 3:** Research Methodology Flowchart ....................................................................... 550  
+**Figure 4:** Integrated Detection and Severity Classification Pipeline ................................ 672  
+**Figure 5:** Model Optimization Pipeline ............................................................................... 740  
+**Figure 6:** Data Collection Setup and Coverage .................................................................... 816  
+**Figure 7:** Pothole Severity Classification Categories ........................................................ 368  
+**Figure 8:** Research Gaps and Proposed Solutions .............................................................. 422  
+**Figure 9:** Evaluation Framework and Performance Metrics ............................................... 1100  
+**Figure 10:** Research Project Timeline (2-Week Schedule) ................................................ 1666  
+
+---
+
+## **List of Tables**
+
+**Table 1:** YOLO Version Performance Comparison ............................................................. 261  
+**Table 2:** Literature Review Summary Table ........................................................................ 487  
+**Table 3:** Model Architecture Comparison Table ................................................................... 1192  
+
+---
+
+## **List of Abbreviations**
+
+**AI** - Artificial Intelligence  
+**AP** - Average Precision  
+**CAA** - Canadian Automobile Association  
+**CNN** - Convolutional Neural Network  
+**COCO** - Common Objects in Context  
+**CPU** - Central Processing Unit  
+**FPS** - Frames Per Second  
+**FPN** - Feature Pyramid Network  
+**FPR** - False Positive Rate  
+**FNR** - False Negative Rate  
+**GPU** - Graphics Processing Unit  
+**GPS** - Global Positioning System  
+**IoU** - Intersection over Union  
+**KL** - Kuala Lumpur  
+**mAP** - mean Average Precision  
+**mIoU** - mean Intersection over Union  
+**MLP** - Multi-Layer Perceptron  
+**NMS** - Non-Maximum Suppression  
+**NPU** - Neural Processing Unit  
+**ONNX** - Open Neural Network Exchange  
+**PAN** - Path Aggregation Network  
+**QAT** - Quantization-Aware Training  
+**RQ** - Research Question  
+**YOLO** - You Only Look Once  
+
+---
+
 ## **Abstract**
 
 This research proposes a deep learning framework for real-time pothole detection and severity classification to address critical gaps in current road infrastructure monitoring systems. The study addresses the limitations of existing single-modal visual detection systems by developing a YOLOv10-based framework that integrates pothole detection with severity classification (minor, moderate, severe) and optimizes performance for real-time deployment on mobile and edge devices. The methodology employs transfer learning, advanced data augmentation, and model optimization techniques including quantization, pruning, and knowledge distillation. Expected outcomes include improved detection accuracy, real-time inference capabilities on resource-constrained devices, and actionable severity information for maintenance prioritization. This research contributes to automated road infrastructure monitoring, supporting transportation authorities in optimizing maintenance resource allocation while enabling collaborative citizen-science approaches to road condition monitoring.
+
+### **Figure 1: System Architecture Overview**
+
+```mermaid
+graph TB
+    A[Road Image/Video Input] --> B[Preprocessing<br/>Resolution: 640x640<br/>Normalization]
+    B --> C[YOLOv10 Detection Model<br/>Transfer Learning from COCO]
+    C --> D[Pothole Detection<br/>Bounding Box + Segmentation]
+    D --> E[Feature Extraction<br/>Geometric: Area, Perimeter<br/>Contextual: Road Condition]
+    E --> F[Severity Classification<br/>Minor | Moderate | Severe]
+    F --> G[Optimized Model<br/>Quantization + Pruning<br/>Knowledge Distillation]
+    G --> H[Mobile/Edge Deployment<br/>Real-time Inference >30 FPS]
+    H --> I[Output: Detection + Severity<br/>Location + Priority]
+    
+    style C fill:#e1f5ff
+    style F fill:#fff4e1
+    style G fill:#e8f5e9
+    style H fill:#f3e5f5
+```
 
 ## **Chapter 1: Introduction**
 
@@ -80,6 +223,26 @@ To develop and evaluate a deep learning framework with severity classification c
    - Test the system's performance in a variety of environmental settings, such as varied road kinds, illumination, and weather.  
    - Verify the system under practical deployment situations. 
 
+### Hypothesis
+
+This research is guided by two main hypotheses that address the core research questions:
+
+**Hypothesis H1 (Severity Classification):**  
+Pothole severity can be accurately classified by deep learning models trained on geometric features (depth estimation, size measurement) and contextual features (surrounding road condition), and integration with detection pipelines can maintain acceptable real-time inference performance through effective model design.
+
+**Rationale for H1:**  
+Geometric features such as pothole area, perimeter, and estimated depth provide quantitative measures that correlate with severity levels. Contextual features, including surrounding road condition and shape irregularity, offer additional discriminative information. The hypothesis posits that a lightweight classifier (MLP or CNN) can effectively utilize these features without significantly impacting the overall inference speed of the detection pipeline.
+
+**Hypothesis H2 (Real-Time Optimization):**  
+Model quantisation, pruning, and knowledge distillation approaches can drastically reduce model size and inference time while retaining acceptable accuracy levels, enabling real-time deployment on devices with limited resources.
+
+**Rationale for H2:**  
+Previous research has demonstrated that model compression techniques can achieve significant size and speed improvements with minimal accuracy loss. Quantization reduces precision from FP32 to INT8 (4x size reduction), structured pruning can remove 30-50% of parameters, and knowledge distillation can transfer knowledge from large teacher models to compact student models. The hypothesis asserts that these techniques, when applied systematically, can enable real-time inference (>30 FPS) on mobile devices while maintaining detection accuracy above acceptable thresholds (mAP@0.5 >0.85).
+
+**Hypothesis Testing Approach:**  
+- **H1**: Will be tested through classification accuracy metrics (overall accuracy, per-class precision/recall, confusion matrix) and inference speed measurements before and after severity classifier integration.
+- **H2**: Will be tested through comparative analysis of model size, inference speed (FPS, latency), and detection accuracy (mAP, precision, recall) across different optimization techniques and their combinations.
+
 ### Scope and Limitation of the Research Project
 
 **Scope:**
@@ -146,7 +309,7 @@ In their investigation of YOLOX for pothole detection, K.C. et al. (2022) discov
 
 This section provides a comprehensive comparison of YOLO versions 8, 10, 11, and 12 based on real performance metrics from official papers and benchmarks. The comparison focuses on three critical aspects: accuracy (mAP), inference speed (FPS), and model parameters. YOLOv10 is selected as the preferred model for this pothole detection project due to its optimal balance of accuracy, speed, and efficiency.
 
-**Performance Comparison Table**
+**Table 1: YOLO Version Performance Comparison**
 
 | Metric | YOLOv8 | YOLOv10 | YOLOv11 | YOLOv12 |
 |--------|--------|---------|---------|---------|
@@ -196,6 +359,36 @@ YOLOv12 transitions to a Transformer-based architecture with attention mechanism
 
 **Selection Rationale: YOLOv10**
 
+### **Figure 2: YOLO Version Performance Comparison**
+
+```mermaid
+graph LR
+    subgraph "Accuracy (mAP@0.5)"
+        A1[YOLOv8<br/>54.3%] 
+        A2[YOLOv10<br/>58.7% ⭐]
+        A3[YOLOv11<br/>55.0%]
+        A4[YOLOv12<br/>55.1%]
+    end
+    
+    subgraph "Inference Speed (Latency)"
+        B1[YOLOv8<br/>8.1ms]
+        B2[YOLOv10<br/>3.15ms ⭐]
+        B3[YOLOv11<br/>9.1ms]
+        B4[YOLOv12<br/>11.2ms]
+    end
+    
+    subgraph "Parameters"
+        C1[YOLOv8<br/>25.0M]
+        C2[YOLOv10<br/>15.4M ⭐]
+        C3[YOLOv11<br/>22.0M]
+        C4[YOLOv12<br/>15.2M]
+    end
+    
+    style A2 fill:#4caf50
+    style B2 fill:#4caf50
+    style C2 fill:#4caf50
+```
+
 YOLOv10 is selected as the preferred model for this pothole detection project based on the following criteria:
 
 - **Highest accuracy (mAP@0.5: 58.7%)** among all compared versions, crucial for reliable pothole detection
@@ -215,13 +408,38 @@ Previous methods made use of conventional computer vision methods. Lokeshwor Hui
 
 ### 2.2 Severity Classification in Road Infrastructure
 
-#### 2.3.1 Severity Assessment Methods
+#### 2.2.1 Severity Assessment Methods
 
 There is little research on the severity classification of road defects. The majority of current systems just concentrate on detection; they do not classify. Sharma et al. (2023) demonstrated an efficient three-class classification (minor, moderate, and severe) based on geometric features in their deep learning-based severity classification system for road cracks. Nevertheless, detecting methods were not incorporated into their methodology.
 
 Convolutional neural networks were used by Kumar et al. (2024) to create a severity evaluation framework for pavement distress; however, automation is limited by the need for manual region selection.
 
 **Research Gap**: A major obstacle to practical deployment is the lack of a real-time integrated pothole detection and severity rating system.
+
+### **Figure 7: Pothole Severity Classification Categories**
+
+```mermaid
+graph LR
+    subgraph "Severity Classification"
+        Minor[Minor Severity<br/>Diameter: <30cm<br/>Depth: <5cm<br/>Impact: Minimal<br/>Priority: Low]
+        Moderate[Moderate Severity<br/>Diameter: 30-60cm<br/>Depth: 5-10cm<br/>Impact: Noticeable<br/>Priority: Medium]
+        Severe[Severe Severity<br/>Diameter: >60cm<br/>Depth: >10cm<br/>Impact: Significant<br/>Priority: High]
+    end
+    
+    Input[Pothole Detection] --> Features[Feature Extraction<br/>Geometric + Contextual]
+    Features --> Minor
+    Features --> Moderate
+    Features --> Severe
+    
+    Minor --> Output1[Maintenance Schedule<br/>Routine Repair]
+    Moderate --> Output2[Maintenance Schedule<br/>Scheduled Repair]
+    Severe --> Output3[Maintenance Schedule<br/>Immediate Repair]
+    
+    style Minor fill:#4caf50
+    style Moderate fill:#ff9800
+    style Severe fill:#f44336
+    style Output3 fill:#ffebee
+```
 
 ### 2.3 Real-Time Optimization for Mobile Deployment
 
@@ -235,7 +453,7 @@ In order to compress pothole detection models, Liu et al. (2024) looked at knowl
 
 ### 2.4 Critical Analysis and Research Gaps
 
-#### 2.5.1 Summary of Current State
+#### 2.4.1 Summary of Current State
 
 Current research demonstrates:
 
@@ -251,6 +469,50 @@ Current research demonstrates:
 - Absence of coordinated systems for classifying severity  
 - Optimization research for mobile deployment needs further development.  
 - Inadequate assessment under a variety of environmental circumstances
+
+### **Figure 8: Research Gaps and Proposed Solutions**
+
+```mermaid
+graph TB
+    subgraph "Current State - Limitations"
+        L1[Single-Modal Detection<br/>Visual Only]
+        L2[No Severity Classification<br/>Detection Only]
+        L3[Limited Real-Time Performance<br/>Desktop/Server Only]
+        L4[Insufficient Evaluation<br/>Limited Conditions]
+    end
+    
+    subgraph "Research Gaps"
+        G1[Gap 1:<br/>Integrated Detection<br/>+ Severity Classification]
+        G2[Gap 2:<br/>Real-Time Optimization<br/>for Mobile Deployment]
+        G3[Gap 3:<br/>Comprehensive Evaluation<br/>Framework]
+    end
+    
+    subgraph "Proposed Solutions"
+        S1[YOLOv10 Detection<br/>+ MLP/CNN Severity Classifier<br/>Integrated Pipeline]
+        S2[Quantization + Pruning<br/>+ Knowledge Distillation<br/>Mobile Optimization]
+        S3[Stratified Evaluation<br/>Multi-Condition Testing<br/>Real-World Validation]
+    end
+    
+    L1 --> G1
+    L2 --> G1
+    L3 --> G2
+    L4 --> G3
+    
+    G1 --> S1
+    G2 --> S2
+    G3 --> S3
+    
+    style L1 fill:#ffebee
+    style L2 fill:#ffebee
+    style L3 fill:#ffebee
+    style L4 fill:#ffebee
+    style G1 fill:#fff3e0
+    style G2 fill:#fff3e0
+    style G3 fill:#fff3e0
+    style S1 fill:#e8f5e9
+    style S2 fill:#e8f5e9
+    style S3 fill:#e8f5e9
+```
 
 #### 2.4.2 Identified Research Gaps
 
@@ -274,6 +536,8 @@ Current research demonstrates:
    - Insufficient real-world deployment validation
 
 ### 2.5 Literature Review Summary Table
+
+**Table 2: Literature Review Summary Table**
 
 | Author(s) | Year | Methodology | Strengths | Limitations/Gaps | Research Contribution |
 | :---- | :---- | :---- | :---- | :---- | :---- |
@@ -333,6 +597,46 @@ The research employs an **experimental research strategy** with the following ch
 ### 3.3 Research Methodology Framework
 
 #### 3.3.1 Overall Research Methodology
+
+### **Figure 3: Research Methodology Flowchart**
+
+```mermaid
+flowchart TD
+    Start([Research Start]) --> Phase1[Phase 1: Data Collection<br/>and Preparation]
+    
+    Phase1 --> P1A[Multi-source Dataset<br/>Integration]
+    Phase1 --> P1B[Visual Data Collection<br/>Malaysia: KL & Surrounding]
+    Phase1 --> P1C[Data Preprocessing<br/>& Augmentation]
+    Phase1 --> P1D[Annotation &<br/>Quality Assurance]
+    
+    P1A & P1B & P1C & P1D --> Phase2[Phase 2: Model Development<br/>and Training]
+    
+    Phase2 --> P2A[Baseline YOLOv10<br/>Model Development]
+    Phase2 --> P2B[Severity Classification<br/>Model Development]
+    Phase2 --> P2C[Transfer Learning<br/>from COCO]
+    Phase2 --> P2D[Training &<br/>Validation]
+    
+    P2A & P2B & P2C & P2D --> Phase3[Phase 3: Optimization<br/>and Real-Time Deployment]
+    
+    Phase3 --> P3A[Quantization<br/>INT8]
+    Phase3 --> P3B[Pruning<br/>30-50% Reduction]
+    Phase3 --> P3C[Knowledge<br/>Distillation]
+    Phase3 --> P3D[Mobile Pipeline<br/>Development]
+    
+    P3A & P3B & P3C & P3D --> Phase4[Phase 4: Comprehensive<br/>Evaluation and Validation]
+    
+    Phase4 --> P4A[Quantitative<br/>Performance Metrics]
+    Phase4 --> P4B[Environmental<br/>Condition Testing]
+    Phase4 --> P4C[Real-world<br/>Deployment]
+    Phase4 --> P4D[Comparative<br/>Analysis]
+    
+    P4A & P4B & P4C & P4D --> End([Research Completion])
+    
+    style Phase1 fill:#e3f2fd
+    style Phase2 fill:#fff3e0
+    style Phase3 fill:#e8f5e9
+    style Phase4 fill:#fce4ec
+```
 
 The research methodology is structured as a **systematic experimental framework** that progresses through four interconnected phases:
 
@@ -416,6 +720,35 @@ The research will utilize a combination of existing datasets and newly collected
 
 #### 3.4.3 Model Development Approach
 
+### **Figure 4: Integrated Detection and Severity Classification Pipeline**
+
+```mermaid
+graph TB
+    Input[Input Image<br/>640x640] --> YOLO[YOLOv10 Detection Model<br/>Backbone: CSPDarknet<br/>Neck: PAN-FPN<br/>Head: Decoupled Head]
+    
+    YOLO --> Detect[Pothole Detection<br/>Bounding Boxes<br/>Segmentation Masks]
+    
+    Detect --> Geo[Geometric Feature<br/>Extraction]
+    Detect --> Context[Contextual Feature<br/>Extraction]
+    Detect --> Visual[Visual Texture<br/>Features]
+    
+    Geo --> |Area, Perimeter<br/>Depth Estimation| Features[Feature Fusion]
+    Context --> |Road Condition<br/>Shape Irregularity| Features
+    Visual --> |Texture Patterns| Features
+    
+    Features --> Classifier[Severity Classifier<br/>MLP/CNN<br/>3 Classes]
+    
+    Classifier --> Minor[Minor<br/><30cm, <5cm depth]
+    Classifier --> Moderate[Moderate<br/>30-60cm, 5-10cm]
+    Classifier --> Severe[Severe<br/>>60cm, >10cm]
+    
+    Minor & Moderate & Severe --> Output[Output:<br/>Location + Severity]
+    
+    style YOLO fill:#e1f5ff
+    style Classifier fill:#fff4e1
+    style Output fill:#e8f5e9
+```
+
 **3.4.3.1 Baseline Single-Modal Model**
 
 - **Architecture**: YOLOv10 (selected based on literature review - optimal balance of accuracy and speed)
@@ -454,6 +787,33 @@ The research will utilize a combination of existing datasets and newly collected
 - **Training Time**: Estimated 24-48 hours per model variant
 
 #### 3.4.5 Optimization Methods
+
+### **Figure 5: Model Optimization Pipeline**
+
+```mermaid
+flowchart LR
+    Base[Base YOLOv10 Model<br/>15.4M Parameters<br/>FP32 Precision] --> Q[Quantization<br/>INT8 Precision<br/>4x Size Reduction]
+    
+    Base --> P[Pruning<br/>Channel Pruning<br/>30-50% Reduction]
+    
+    Base --> KD[Knowledge Distillation<br/>Teacher-Student<br/>50% Size Reduction]
+    
+    Q --> Opt1[Optimized Model 1<br/>Quantized]
+    P --> Opt2[Optimized Model 2<br/>Pruned]
+    KD --> Opt3[Optimized Model 3<br/>Distilled]
+    
+    Opt1 --> Convert[Model Conversion<br/>PyTorch → ONNX<br/>→ TensorFlow Lite/CoreML]
+    Opt2 --> Convert
+    Opt3 --> Convert
+    
+    Convert --> Mobile[Mobile Deployment<br/>iOS/Android<br/>Real-time >30 FPS]
+    
+    style Base fill:#ffebee
+    style Q fill:#e3f2fd
+    style P fill:#fff3e0
+    style KD fill:#e8f5e9
+    style Mobile fill:#f3e5f5
+```
 
 **3.4.5.1 Model Compression Techniques**
 
@@ -503,6 +863,57 @@ The research will utilize a combination of existing datasets and newly collected
 - **Data**: Latitude, longitude, altitude, speed, heading
 
 #### 3.6.2 Data Collection Environment
+
+### **Figure 6: Data Collection Setup and Coverage**
+
+```mermaid
+graph TB
+    subgraph "Collection Setup"
+        Camera[High-Resolution Camera<br/>1080p, 30fps<br/>Wide-angle 120° FOV]
+        GPS[GPS Module<br/><5m Accuracy<br/>Location Tagging]
+        Storage[High-Speed Storage<br/>Class 10 SD Card<br/>64GB Minimum]
+    end
+    
+    subgraph "Collection Locations - Malaysia"
+        Urban[Urban Roads<br/>City Center<br/>Commercial Areas]
+        Suburban[Suburban Roads<br/>Residential Areas]
+        Highway[Highways<br/>Expressways]
+        Industrial[Industrial Areas<br/>Manufacturing Zones]
+    end
+    
+    subgraph "Environmental Conditions"
+        Time[Time of Day<br/>Morning | Midday<br/>Evening | Night]
+        Weather[Weather<br/>Sunny | Overcast<br/>Rainy | Post-rain]
+        Lighting[Lighting<br/>Bright | Overcast<br/>Dusk | Night]
+        Road[Road Condition<br/>Dry | Wet<br/>Partially Wet | Debris]
+    end
+    
+    Camera --> Urban
+    Camera --> Suburban
+    Camera --> Highway
+    Camera --> Industrial
+    
+    GPS --> Urban
+    GPS --> Suburban
+    GPS --> Highway
+    GPS --> Industrial
+    
+    Urban --> Time
+    Suburban --> Time
+    Highway --> Time
+    Industrial --> Time
+    
+    Time --> Weather
+    Weather --> Lighting
+    Lighting --> Road
+    
+    style Camera fill:#e3f2fd
+    style GPS fill:#fff3e0
+    style Urban fill:#e8f5e9
+    style Suburban fill:#e8f5e9
+    style Highway fill:#e8f5e9
+    style Industrial fill:#e8f5e9
+```
 
 #### 3.6.2.1 Study Location
 
@@ -677,7 +1088,7 @@ The sampling frame consists of:
 
 #### 3.7.1 Quantitative Performance Metrics
 
-#### 5.1.1 Detection Performance Metrics
+##### 3.7.1.1 Detection Performance Metrics
 
 **Primary Metrics**:
 
@@ -737,6 +1148,53 @@ The sampling frame consists of:
 
 #### 3.7.2.1 Baseline Comparisons
 
+### **Figure 9: Evaluation Framework and Performance Metrics**
+
+```mermaid
+graph TB
+    subgraph "Evaluation Components"
+        E1[Quantitative Metrics<br/>Precision, Recall, F1<br/>mAP, mIoU]
+        E2[Severity Classification<br/>Accuracy, Per-Class Metrics<br/>Confusion Matrix]
+        E3[Real-Time Performance<br/>FPS, Latency<br/>Model Size, Memory]
+        E4[Environmental Testing<br/>Lighting, Weather<br/>Time of Day]
+    end
+    
+    subgraph "Comparative Analysis"
+        C1[YOLO Version Comparison<br/>v8 vs v10 vs v11 vs v12]
+        C2[Optimization Techniques<br/>Quantization vs Pruning<br/>vs Distillation]
+        C3[Baseline Comparisons<br/>State-of-the-Art Systems]
+    end
+    
+    subgraph "Statistical Analysis"
+        S1[Hypothesis Testing<br/>t-tests, ANOVA]
+        S2[Effect Size Analysis<br/>Cohen's d]
+        S3[Confidence Intervals<br/>95% CI, Bootstrap]
+    end
+    
+    E1 --> C1
+    E2 --> C2
+    E3 --> C2
+    E4 --> C3
+    
+    C1 --> S1
+    C2 --> S1
+    C3 --> S1
+    
+    S1 --> S2
+    S2 --> S3
+    
+    style E1 fill:#e3f2fd
+    style E2 fill:#e3f2fd
+    style E3 fill:#e3f2fd
+    style E4 fill:#e3f2fd
+    style C1 fill:#fff3e0
+    style C2 fill:#fff3e0
+    style C3 fill:#fff3e0
+    style S1 fill:#e8f5e9
+    style S2 fill:#e8f5e9
+    style S3 fill:#e8f5e9
+```
+
 **Model Architecture Comparison**
 
 This comparison evaluates different YOLO architecture versions to determine the optimal base model for the pothole detection task, considering accuracy, speed, and deployment requirements.
@@ -783,6 +1241,8 @@ This comparison evaluates different YOLO architecture versions to determine the 
    - **Efficiency Metrics**: Parameters count, model size (MB), FLOPs (GFLOPs)
 
 2. **Comparative Analysis Table**:
+
+**Table 3: Model Architecture Comparison Table**
 
 | Model | mAP@0.5 | mAP@0.5:0.95 | Parameters | Speed (FPS) | Latency (ms) | Model Size (MB) | Best For |
 |-------|---------|--------------|------------|------------|--------------|-----------------|----------|
@@ -1207,129 +1667,66 @@ Wilcoxon, F. (1945). Individual comparisons by ranking methods. *Biometrics Bull
 
 ---
 
-## **Chapter 5: Gantt Chart**
+## **Gantt Chart / Study Plan / Work Schedule**
 
-### 5.1 Research Project Timeline
+### **Figure 10: Research Project Timeline (2-Week Schedule)**
 
-The research project is planned over a period of **12 months**, organized into four main phases with specific deliverables and milestones. The timeline includes buffer time (20%) to account for unforeseen challenges.
+```mermaid
+gantt
+    title Research Project Timeline - 2 Weeks
+    dateFormat YYYY-MM-DD
+    section Week 1
+    Literature Review & Background Research    :a1, 2025-01-06, 2d
+    Data Collection & Preparation            :a2, 2025-01-06, 3d
+    Model Development Setup                   :a3, 2025-01-08, 2d
+    Baseline Model Training                  :a4, 2025-01-09, 2d
+    section Week 2
+    Severity Classification Development      :b1, 2025-01-13, 2d
+    Model Optimization (Quantization/Pruning) :b2, 2025-01-13, 2d
+    Performance Evaluation & Testing         :b3, 2025-01-15, 2d
+    Documentation & Report Writing          :b4, 2025-01-13, 3d
+    Final Review & Submission                :b5, 2025-01-19, 1d
+```
 
-#### 5.1.1 Phase 1: Data Collection and Preparation (Months 1-3)
+### **Detailed Work Schedule**
 
-**Month 1:**
-- Dataset acquisition from public sources (Roboflow, academic datasets)
-- Data collection setup and equipment preparation
-- Annotation tool setup and team training
-- **Milestone**: Dataset acquisition completed
+**Week 1 (Days 1-7):**
 
-**Month 2:**
-- Field data collection (visual data)
-- Data collection across diverse environmental conditions
-- Initial data quality assessment
-- **Milestone**: 50% of target data collected
+| Day | Task | Duration | Deliverables |
+|-----|------|----------|-------------|
+| Day 1-2 | Literature Review & Background Research | 2 days | Comprehensive literature review, gap analysis |
+| Day 1-3 | Data Collection & Preparation | 3 days | Dataset collection, preprocessing, annotation |
+| Day 3-4 | Model Development Setup | 2 days | Environment setup, YOLOv10 configuration |
+| Day 4-5 | Baseline Model Training | 2 days | Initial model training, validation |
 
-**Month 3:**
-- Complete data collection (target: 1000-1500 pothole instances)
-- Data annotation and quality control
-- Dataset validation and splitting (train/validation/test)
-- **Deliverable**: Annotated dataset ready for training
+**Week 2 (Days 8-14):**
 
-#### 5.1.2 Phase 2: Model Development and Training (Months 4-7)
+| Day | Task | Duration | Deliverables |
+|-----|------|----------|-------------|
+| Day 8-9 | Severity Classification Development | 2 days | Severity classifier model, integration |
+| Day 8-9 | Model Optimization | 2 days | Quantization, pruning, distillation |
+| Day 10-11 | Performance Evaluation & Testing | 2 days | Metrics calculation, comparative analysis |
+| Day 8-10 | Documentation & Report Writing | 3 days | Research proposal document, figures, tables |
+| Day 14 | Final Review & Submission | 1 day | Final review, corrections, submission |
 
-**Month 4:**
-- Baseline model development (YOLOv10)
-- Transfer learning setup and hyperparameter tuning
-- Initial training experiments
-- **Milestone**: Baseline model trained
+### **Key Milestones**
 
-**Month 5:**
-- Severity classification model development
-- Feature engineering and model architecture design
-- Integration of detection and classification pipelines
-- **Milestone**: Integrated model architecture completed
+1. **Milestone 1 (End of Day 3)**: Dataset collection and preparation completed
+2. **Milestone 2 (End of Day 5)**: Baseline model trained and validated
+3. **Milestone 3 (End of Day 9)**: Severity classification integrated, optimization completed
+4. **Milestone 4 (End of Day 11)**: Performance evaluation completed
+5. **Milestone 5 (End of Day 14)**: Final report submitted
 
-**Month 6:**
-- Comprehensive model training with data augmentation
-- Hyperparameter optimization
-- Model validation and performance assessment
-- **Deliverable**: Trained detection and classification models
+### **Resource Allocation**
 
-**Month 7:**
-- Model refinement based on validation results
-- Comparative evaluation with baseline approaches
-- Initial performance analysis
-- **Milestone**: Model development completed
+- **Week 1**: Focus on data preparation and baseline model development (60% effort)
+- **Week 2**: Focus on enhancement, optimization, and documentation (40% effort)
 
-#### 5.1.3 Phase 3: Optimization and Real-Time Deployment (Months 8-9)
+### **Risk Mitigation Timeline**
 
-**Month 8:**
-- Model optimization techniques implementation (quantization, pruning, distillation)
-- Trade-off analysis (accuracy vs. speed vs. size)
-- Mobile deployment preparation
-- **Milestone**: Optimization techniques implemented
-
-**Month 9:**
-- Mobile device testing and performance profiling
-- Inference pipeline optimization
-- Real-time performance validation
-- **Deliverable**: Optimized models for mobile deployment
-
-#### 5.1.4 Phase 4: Comprehensive Evaluation and Validation (Months 10-12)
-
-**Month 10:**
-- Comprehensive performance evaluation
-- Statistical analysis and hypothesis testing
-- Comparative analysis with baseline approaches
-- **Milestone**: Evaluation completed
-
-**Month 11:**
-- Real-world field testing
-- Environmental condition testing
-- Performance validation across diverse scenarios
-- **Deliverable**: Field testing results
-
-**Month 12:**
-- Results analysis and interpretation
-- Research report writing
-- Documentation and code repository preparation
-- Final presentation preparation
-- **Deliverable**: Complete research report and documentation
-
-#### 5.1.5 Gantt Chart Visualization
-
-| Phase | Activities | Month 1 | Month 2 | Month 3 | Month 4 | Month 5 | Month 6 | Month 7 | Month 8 | Month 9 | Month 10 | Month 11 | Month 12 |
-|-------|-----------|---------|---------|---------|---------|---------|---------|---------|---------|---------|----------|----------|----------|
-| **Phase 1: Data Collection** | Dataset Acquisition | ████████ | | | | | | | | | | | |
-| | Field Data Collection | | ████████ | ████████ | | | | | | | | | |
-| | Data Annotation | | ████████ | ████████ | | | | | | | | | |
-| **Phase 2: Model Development** | Baseline Model | | | | ████████ | | | | | | | | |
-| | Severity Classification | | | | | ████████ | | | | | | | |
-| | Model Training | | | | | | ████████ | ████████ | | | | | |
-| **Phase 3: Optimization** | Model Optimization | | | | | | | | ████████ | ████████ | | | |
-| | Mobile Deployment | | | | | | | | | ████████ | | | |
-| **Phase 4: Evaluation** | Performance Evaluation | | | | | | | | | | ████████ | | |
-| | Field Testing | | | | | | | | | | | ████████ | |
-| | Report Writing | | | | | | | | | | | ████████ | ████████ |
-
-**Legend:**
-- ████ = Active work period
-- Buffer time (20%) is integrated into each phase
-
-#### 5.1.6 Key Milestones and Deliverables
-
-| Milestone | Target Month | Deliverable |
-|-----------|--------------|-------------|
-| M1: Dataset Acquisition Complete | Month 1 | Acquired datasets from public sources |
-| M2: 50% Data Collection | Month 2 | 500-750 annotated pothole instances |
-| M3: Dataset Ready | Month 3 | Complete annotated dataset (1000-1500 instances) |
-| M4: Baseline Model Trained | Month 4 | Trained YOLOv10 baseline model |
-| M5: Integrated Architecture | Month 5 | Detection + severity classification model |
-| M6: Models Trained | Month 6 | Fully trained detection and classification models |
-| M7: Model Development Complete | Month 7 | Validated and refined models |
-| M8: Optimization Implemented | Month 8 | Optimized models with compression techniques |
-| M9: Mobile Deployment Ready | Month 9 | Models optimized for mobile devices |
-| M10: Evaluation Complete | Month 10 | Comprehensive performance evaluation results |
-| M11: Field Testing Complete | Month 11 | Real-world validation results |
-| M12: Final Report | Month 12 | Complete research report and documentation |
+- **Day 2**: Review data collection progress, adjust if needed
+- **Day 5**: Review model training progress, adjust hyperparameters if needed
+- **Day 9**: Review optimization results, adjust techniques if needed
+- **Day 11**: Review evaluation results, ensure all metrics are met
 
 ---
-
