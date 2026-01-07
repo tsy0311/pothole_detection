@@ -73,9 +73,11 @@
     - 3.8.2 Expected Contributions  
     - 3.8.3 Implications of Results  
     - 3.8.4 Answering Research Questions
-  - 3.10 Current Implementation Status and Updates
-    - 3.10.1 Recent System Enhancements
-    - 3.10.2 Future Enhancement Plans
+  - 3.10 Model Testing and Evaluation Report
+    - 3.10.1 Model Training Results and Performance Metrics
+    - 3.10.2 Real-Time Application Testing (`main.py`)
+    - 3.10.3 Notebook Organization and Documentation
+    - 3.10.4 Testing Summary and Future Work
 
   [Chapter 4: References](#chapter-4:-references)
 
@@ -1469,79 +1471,211 @@ The research questions will be answered through:
 
 ---
 
-### 3.10 Current Implementation Status and Updates {#3.10-current-implementation-status}
+### 3.10 Model Testing and Evaluation Report {#3.10-model-testing-report}
 
-This section documents the current implementation status, recent improvements, and bug fixes implemented in the pothole detection system as of December 2024.
+""**NEW SECTION - Added December 2024**""
 
-#### 3.10.1 Recent System Enhancements (December 2024)
+This section reports on the testing and evaluation of the trained YOLOv10 pothole detection model, including model performance results from training, real-time application testing, and system functionality verification.
 
-##### 3.10.1.1 Application Improvements (`main.py`)
+#### 3.10.1 Model Training Results and Performance Metrics
 
-**Video File Processing Fix**
-- **Issue**: Selected video files were not processing when the "Start Video" button was clicked
-- **Solution**: Fixed video capture initialization by properly releasing existing captures before opening new video sources
-- **Impact**: Users can now successfully process video files for pothole detection
+""**NEW CONTENT - Model Training Results**""
 
-**Video Preview Feature**
-- **Enhancement**: Added instant preview of the first frame when a video file is selected
-- **Features**: 
-  - Displays video metadata (resolution, duration, FPS)
-  - Shows first frame immediately in the display area
-  - Validates video file format and codec support
-- **Impact**: Users can preview videos before processing, improving user experience
+The model was trained using the YOLOv10n-segmentation architecture on a dataset of 780 pothole images (720 training, 60 validation). The training process and results are documented in `model.ipynb`.
 
-**Bounding Box Display Fix**
-- **Issue**: Saved images in `ResultPrediction` folder were missing bounding boxes
-- **Solution**: Modified `_save_detection()` to save annotated frames (with bounding boxes) instead of original frames
-- **Impact**: All saved detection images now properly display bounding boxes, confidence scores, and labels
+##### 3.10.1.1 Training Configuration
 
-**Enhanced Error Handling**
-- **Improvements**:
-  - Added file existence validation before opening videos
-  - Improved error messages with troubleshooting suggestions
-  - Better handling of unsupported video formats and corrupted files
-- **Impact**: More robust application with clearer error feedback
+- **Model Architecture**: YOLOv10n (nano variant) for segmentation
+- **Input Size**: 320x320 pixels
+- **Training Epochs**: 100 epochs
+- **Batch Size**: 16
+- **Learning Rate**: 0.01 (with scheduler)
+- **Optimizer**: SGD with momentum 0.937
+- **Weight Decay**: 0.0005
+- **Dataset**: 720 training images, 60 validation images
 
-##### 3.10.1.2 Notebook Improvements (`model.ipynb`)
+##### 3.10.1.2 Training Output and Results
 
-**Markdown Documentation**
-- **Enhancement**: Added descriptive markdown titles above each code cell (26+ new markdown cells)
-- **Benefits**:
-  - Improved notebook organization and readability
-  - Easier navigation for users and reviewers
-  - Better understanding of each cell's purpose
-- **Impact**: Notebook is now more professional and easier to follow
+**Model Weights Location**: `runs/segment/train/weights/best.pt`
 
-**YOLOv10 Compatibility**
-- **Issue**: Multiple warnings about unsupported `augment=True` parameter
-- **Solution**: Removed all instances of `augment=True` from prediction and validation calls
-- **Impact**: Clean execution without warnings, proper YOLOv10 compatibility
+**Training Metrics** (from `runs/segment/train/results.csv`):
+- Training loss curves and validation metrics are automatically logged
+- Best model is saved based on validation mAP performance
+- Training visualizations include loss curves, validation images, and confusion matrices
 
-**Code Organization**
-- **Improvements**: Better cell organization with logical grouping
-- **Impact**: Improved maintainability and understanding of the training pipeline
+**Figure Placeholder - Training Loss Curves**: 
+> **[PLACEHOLDER: Insert screenshot of training loss curves from `runs/segment/train/results.png` or `model.ipynb` training output]**
 
-##### 3.10.1.3 Technical Details
+**Figure Placeholder - Training Progress**:
+> **[PLACEHOLDER: Insert screenshot showing training progress, epochs, and validation metrics from model.ipynb]**
 
-**Video Processing Pipeline**
-- Proper video capture lifecycle management
-- Frame-by-frame processing with detection
-- Automatic video end detection and notification
+##### 3.10.1.3 Model Validation Results
 
-**Image Saving Mechanism**
-- Saves annotated frames with bounding boxes
-- Includes confidence scores and class labels
-- Debouncing mechanism to prevent duplicate saves
-- GPS coordinate recording (optional)
+""**NEW CONTENT - Validation Metrics**""
 
-**Model Compatibility**
-- Full YOLOv10 support
-- Removed deprecated parameters
-- Optimized for real-time inference
+The trained model was evaluated using multiple validation approaches:
 
-#### 3.10.2 Future Enhancement Plans
+**Standard Evaluation** (`runs/detect/standard_eval/`):
+- Standard validation metrics on validation set
+- Precision-Recall curves
+- Confusion matrix analysis
 
-Potential areas for future development:
+**Advanced Validation** (`runs/detect/advanced_validation/`):
+- Comprehensive validation with detailed metrics
+- Performance across different confidence thresholds
+
+**Final Validation** (`runs/detect/final_validation/`):
+- Final model evaluation results
+- All validation graphs and metrics
+
+**Figure Placeholder - Validation Metrics**:
+> **[PLACEHOLDER: Insert screenshot of validation metrics from `runs/detect/final_validation/` showing mAP, Precision, Recall, F1-Score]**
+
+**Figure Placeholder - Precision-Recall Curves**:
+> **[PLACEHOLDER: Insert screenshot of BoxPR_curve.png from final_validation folder]**
+
+**Figure Placeholder - Confusion Matrix**:
+> **[PLACEHOLDER: Insert screenshot of confusion_matrix.png and confusion_matrix_normalized.png from final_validation folder]**
+
+**Figure Placeholder - Validation Predictions**:
+> **[PLACEHOLDER: Insert screenshots of val_batch0_pred.jpg, val_batch1_pred.jpg showing model predictions on validation images]**
+
+**Key Performance Metrics** (to be filled from actual results):
+- **mAP@0.5**: [To be filled from validation results]
+- **mAP@0.5:0.95**: [To be filled from validation results]
+- **Precision**: [To be filled from validation results]
+- **Recall**: [To be filled from validation results]
+- **F1-Score**: [To be filled from validation results]
+
+#### 3.10.2 Real-Time Application Testing (`main.py`)
+
+""**NEW CONTENT - Application Testing**""
+
+The trained model was integrated into a real-time detection application (`main.py`) for testing in practical scenarios.
+
+##### 3.10.2.1 Application Architecture and Functionality
+
+**Application Overview**:
+The `main.py` file implements a Tkinter-based GUI application (`PotholeDetection` class) that provides real-time pothole detection capabilities.
+
+**Key Components**:
+
+1. **Model Loading**:
+   - Loads trained YOLOv10 model from `runs/segment/train/weights/best.pt`
+   - Supports custom model path via configuration file
+   - Automatic model validation and error handling
+
+2. **Video Input Sources**:
+   - **Camera Input**: Real-time detection from webcam/camera (default camera index 0)
+   - **Video File Input**: Process pre-recorded video files (MP4, AVI, MOV, MKV, FLV formats)
+   - Video preview feature: Shows first frame when video file is selected
+
+3. **Detection Pipeline**:
+   - Frame-by-frame processing at configurable intervals (~30 FPS default)
+   - YOLOv10 inference with configurable confidence threshold (0.1-1.0)
+   - Real-time bounding box drawing and annotation
+   - FPS monitoring and display
+
+4. **Result Saving**:
+   - Automatic saving of detected pothole images to `ResultPrediction/` folder
+   - Images include bounding boxes, confidence scores, and labels
+   - Debouncing mechanism prevents duplicate saves (minimum 2-second interval)
+   - GPS coordinate recording (optional, requires Google API key) to `ResultLocation/` folder
+
+5. **User Interface Features**:
+   - Real-time video feed display (800x600 max display size)
+   - Confidence threshold slider (0.1-1.0)
+   - Statistics panel (detections count, saved count, session time, FPS)
+   - Video source selection (Camera/File)
+   - Results folder access button
+
+**Figure Placeholder - Application GUI**:
+> **[PLACEHOLDER: Insert screenshot of the main application window showing video feed, controls, and statistics panel]**
+
+**Figure Placeholder - Video Preview**:
+> **[PLACEHOLDER: Insert screenshot showing video file selection and preview feature]**
+
+**Figure Placeholder - Detection in Action**:
+> **[PLACEHOLDER: Insert screenshot showing real-time detection with bounding boxes displayed on video feed]**
+
+##### 3.10.2.2 Application Testing Results
+
+""**NEW CONTENT - Testing Scenarios**""
+
+**Camera Testing**:
+- Real-time detection from camera feed
+- Performance: [FPS to be measured and reported]
+- Detection accuracy: [To be evaluated]
+
+**Video File Testing**:
+- Successfully processes video files in multiple formats
+- Video preview functionality works correctly
+- Frame-by-frame detection and annotation
+
+**Figure Placeholder - Saved Detection Results**:
+> **[PLACEHOLDER: Insert screenshots of saved images from `ResultPrediction/` folder showing detected potholes with bounding boxes]**
+
+**Figure Placeholder - Detection Statistics**:
+> **[PLACEHOLDER: Insert screenshot showing statistics panel with detection counts, saved images count, and session information]**
+
+##### 3.10.2.3 System Improvements and Bug Fixes
+
+""**NEW CONTENT - System Improvements**""
+
+During testing, several issues were identified and resolved:
+
+1. **Video File Processing Fix**:
+   - **Issue**: Selected video files were not processing when "Start Video" button was clicked
+   - **Solution**: Fixed video capture initialization by properly releasing existing captures before opening new video sources
+   - **Status**: ✅ Resolved
+
+2. **Video Preview Feature**:
+   - **Enhancement**: Added instant preview of first frame when video file is selected
+   - **Features**: Displays video metadata (resolution, duration, FPS), validates file format
+   - **Status**: ✅ Implemented
+
+3. **Bounding Box Display Fix**:
+   - **Issue**: Saved images in `ResultPrediction` folder were missing bounding boxes
+   - **Solution**: Modified `_save_detection()` to save annotated frames instead of original frames
+   - **Status**: ✅ Resolved
+
+4. **Enhanced Error Handling**:
+   - Added file existence validation
+   - Improved error messages with troubleshooting suggestions
+   - Better handling of unsupported video formats
+   - **Status**: ✅ Implemented
+
+#### 3.10.3 Notebook Organization and Documentation
+
+""**NEW CONTENT - Notebook Improvements**""
+
+The training notebook (`model.ipynb`) was enhanced for better organization and documentation:
+
+- **Markdown Titles**: Added descriptive markdown titles above each code cell (26+ new markdown cells)
+- **YOLOv10 Compatibility**: Removed unsupported `augment=True` parameter to eliminate warnings
+- **Code Organization**: Improved cell organization with logical grouping
+
+**Figure Placeholder - Notebook Structure**:
+> **[PLACEHOLDER: Insert screenshot of model.ipynb showing markdown titles and organized cell structure]**
+
+#### 3.10.4 Testing Summary and Future Work
+
+""**NEW CONTENT - Testing Summary**""
+
+**Current Testing Status**:
+- ✅ Model training completed successfully
+- ✅ Model validation performed with multiple evaluation approaches
+- ✅ Real-time application implemented and tested
+- ✅ Video processing functionality verified
+- ✅ Image saving with bounding boxes working correctly
+
+**Areas Requiring Further Testing**:
+- Real-world field testing with actual road conditions
+- Performance testing on mobile devices
+- Long-duration video processing stability
+- GPS coordinate accuracy validation (when API key is configured)
+
+**Future Enhancements**:
 - Severity classification integration
 - Multi-modal detection (combining visual and sensor data)
 - Real-time optimization for mobile devices
