@@ -73,11 +73,11 @@
     - 3.8.2 Expected Contributions  
     - 3.8.3 Implications of Results  
     - 3.8.4 Answering Research Questions
-  - 3.10 Model Testing and Evaluation Report
-    - 3.10.1 Model Training Results and Performance Metrics
-    - 3.10.2 Real-Time Application Testing (`main.py`)
-    - 3.10.3 Notebook Organization and Documentation
-    - 3.10.4 Testing Summary and Future Work
+  - 3.9 Model Testing and Evaluation Report
+    - 3.9.1 Model Training Results and Performance Metrics
+    - 3.9.2 Real-Time Application Testing (`main.py`)
+    - 3.9.3 Notebook Organization and Documentation
+    - 3.9.4 Testing Summary and Future Work
 
   [Chapter 4: References](#chapter-4:-references)
 
@@ -537,7 +537,7 @@ The four interrelated stages of the research approach are organised as a **syste
 - Real-world deployment validation  
 - Comparative analysis with baseline approaches
 
-#### 3.2.2 Alignment with Research Questions
+#### 3.3.2 Alignment with Research Questions
 
 Every study question is specifically addressed by the methodology:
 
@@ -680,11 +680,11 @@ The study will make use of both recently gathered data and pre-existing datasets
 
 ---
 
-### 3.6 Methods and Instruments
+### 3.5 Methods and Instruments
 
-#### 3.6.1 Data Collection Instruments
+#### 3.5.1 Data Collection Instruments
 
-#### 4.1.1 Visual Data Collection
+#### 3.5.1.1 Visual Data Collection
 
 **Primary Instrument**: High-resolution camera system
 
@@ -698,19 +698,19 @@ The study will make use of both recently gathered data and pre-existing datasets
 - **Specifications**: 12MP, 4K video capability  
 - **Advantages**: Built-in sensors, GPS, easier synchronization
 
-#### 3.6.1.2 GPS and Location Data
+#### 3.5.1.2 GPS and Location Data
 
 - **Instrument:** External GPS module or smartphone's built-in GPS  
 - **Location tagging accuracy:** less than 5 meters  
 - **Information:** direction, speed, altitude, latitude, and longitude
 
-#### 3.6.2 Data Collection Environment
+#### 3.5.2 Data Collection Environment
 
 ### **Figure 8: Data Collection Setup and Coverage** {#figure-8:-data-collection-setup-and-coverage}
 
 ![][image8]
 
-#### 3.6.2.1 Study Location
+#### 3.5.2.1 Study Location
 
 The data collection will be conducted in **Malaysia**, specifically:
 
@@ -721,14 +721,14 @@ The data collection will be conducted in **Malaysia**, specifically:
   - High frequency of potholes as a result of excessive rainfall  
   - Accessibility for methodical data gathering
 
-#### 3.6.2.2 Collection Sites
+#### 3.5.2.2 Collection Sites
 
 1. **Urban Roads**: City center, commercial areas (high traffic, varied lighting)  
 2. **Suburban Roads**: Residential areas (moderate traffic, standard conditions)  
 3. **Highways**: Expressways and major roads (high speed, long distances)  
 4. **Industrial Areas**: Manufacturing zones (heavy vehicle traffic, varied road conditions)
 
-#### 3.6.2.3 Environmental Conditions Coverage
+#### 3.5.2.3 Environmental Conditions Coverage
 
 Systematic collection across:
 
@@ -737,9 +737,9 @@ Systematic collection across:
 - **Lighting Conditions**: Bright daylight, Overcast, Dusk, Night (with/without streetlights)  
 - **Road Conditions**: Dry, Wet, Partially wet, Debris-covered
 
-#### 3.6.3 Sampling Strategy
+#### 3.5.3 Sampling Strategy
 
-#### 3.6.3.1 Sampling Frame
+#### 3.5.3.1 Sampling Frame
 
 The sampling frame consists of:
 
@@ -747,7 +747,7 @@ The sampling frame consists of:
 - **Temporal Frame:** To capture seasonal fluctuations, data is collected over a period of three to four months.  
 - **Condition Frame:** All of the previously mentioned environmental conditions
 
-#### 3.6.3.2 Sampling Method
+#### 3.5.3.2 Sampling Method
 
 **Stratified Random Sampling** approach:
 
@@ -774,7 +774,7 @@ The sampling frame consists of:
    - methodical gathering using predetermined routes  
    - When potholes are present, opportunistic sampling
 
-#### 3.6.3.3 Sample Size Justification
+#### 3.5.3.3 Sample Size Justification
 
 **Statistical Power Analysis**:
 
@@ -792,9 +792,9 @@ The sampling frame consists of:
 
 **Final Target**: 1000–1500 pothole occurrences with annotations
 
-#### 3.6.4 Data Annotation and Labeling
+#### 3.5.4 Data Annotation and Labeling
 
-#### 3.6.4.1 Annotation Tools
+#### 3.5.4.1 Annotation Tools
 
 - **Primary Tool**: LabelImg or CVAT (Computer Vision Annotation Tool)  
 - **Format**: YOLO format (normalized bounding boxes and segmentation masks)  
@@ -803,7 +803,7 @@ The sampling frame consists of:
   - Segmentation masks for accurate bounds of potholes  
   - Labels of severity (minimal, moderate, severe)
 
-#### 3.6.4.2 Annotation Protocol
+#### 3.5.4.2 Annotation Protocol
 
 1. **Detection Annotation**:  
      
@@ -828,15 +828,15 @@ The sampling frame consists of:
    - Expert evaluation of instances that are unclear  
    - Regular quality assessments of annotations
 
-#### 3.6.4.3 Annotation Team
+#### 3.5.4.3 Annotation Team
 
 - Two to three skilled annotators serve as the primary annotators.  
 - **Expert Reviewers:** One or two specialists in road infrastructure or civil engineering  
 - **Training:** Training sessions and uniform annotation guidelines
 
-#### 3.6.5 Credibility and Authenticity of Data
+#### 3.5.5 Credibility and Authenticity of Data
 
-##### 3.6.5.1 Data Quality Assurance
+##### 3.5.5.1 Data Quality Assurance
 
 **Quality Control of Collection**
 
@@ -850,7 +850,7 @@ The sampling frame consists of:
 - **Expert Validation:** 10% of annotations are reviewed by topic experts using a random sampling.  
 - **Consistency Checks:** Re-annotating samples on a regular basis to evaluate consistency
 
-##### 3.6.5.2 Data Authenticity Measures
+##### 3.5.5.2 Data Authenticity Measures
 
 1. **Source Verification**:  
      
@@ -874,16 +874,16 @@ The sampling frame consists of:
    - Checklists and standardised procedures  
    - Public disclosure of the approach used for collecting (if appropriate)
 
-##### 3.6.5.3 Ethical Considerations
+##### 3.5.5.3 Ethical Considerations
 
 - **Privacy:** Blurring recognisable features and license plates in pictures  
 - **Public Data:** No private property is collected; only public highways are used.  
 - **Consent:** If appropriate, for any identifiable people  
 - Data security includes safe backup techniques and encrypted storage.
 
-#### 3.6.6 Experimental Setup and Infrastructure
+#### 3.5.6 Experimental Setup and Infrastructure
 
-##### 3.6.6.1 Development Environment
+##### 3.5.6.1 Development Environment
 
 - **Hardware**:  
     
@@ -899,7 +899,7 @@ The sampling frame consists of:
   - Python 3.10+, Jupyter Notebooks, and Git version control are development tools.  
   - Data processing: scikit-learn, OpenCV, NumPy, and Pandas
 
-##### 3.6.6.2 Deployment Environment
+##### 3.5.6.2 Deployment Environment
 
 - **Mobile Platforms**: iOS (iPhone) and Android devices  
 - **Edge Devices**: Raspberry Pi 4, NVIDIA Jetson Nano (for edge computing validation)  
@@ -907,11 +907,11 @@ The sampling frame consists of:
 
 ---
 
-### 3.7 Data Analysis
+### 3.6 Data Analysis
 
-#### 3.7.1 Quantitative Performance Metrics
+#### 3.6.1 Quantitative Performance Metrics
 
-#### 5.1.1 Detection Performance Metrics
+#### 3.6.1.1 Detection Performance Metrics
 
 **Primary Metrics**:
 
@@ -955,14 +955,14 @@ The sampling frame consists of:
 - **False Negative Rate (FNR)**: FN / (FN \+ TP)  
 - **Performance Metrics**: Detection accuracy for pothole class
 
-#### 3.7.1.2 Severity Classification Metrics
+#### 3.6.1.2 Severity Classification Metrics
 
 1. **Classification Accuracy**: Overall correct classification rate  
 2. **Per-Class Precision, Recall, F1-Score**: For minor, moderate, severe classes  
 3. **Confusion Matrix**: Detailed classification performance analysis  
 4. **Cohen's Kappa**: Inter-rater agreement with expert annotations
 
-#### 3.7.1.3 Real-Time Performance Metrics
+#### 3.6.1.3 Real-Time Performance Metrics
 
 1. **Inference Speed**: Frames per second (FPS)  
      
@@ -993,9 +993,9 @@ The sampling frame consists of:
      
    - Measurement: mAh consumption per hour of operation
 
-#### 3.7.2 Comparative Analysis Methods
+#### 3.6.2 Comparative Analysis Methods
 
-#### 3.7.2.1 Baseline Comparisons
+#### 3.6.2.1 Baseline Comparisons
 
 ### **Figure 9: Evaluation Framework and Performance Metrics** {#figure-9:-evaluation-framework-and-performance-metrics}
 
@@ -1141,7 +1141,7 @@ In order to identify the best base model for the pothole detection problem, this
    - **Statistical Validation:** To account for training variation, each model must have at least three independent training runs.  
    - **Confidence Reporting:** All performance measures have 95% confidence intervals.
 
-#### 3.7.2.2 Environmental Condition Analysis
+#### 3.6.2.2 Environmental Condition Analysis
 
 **Stratified Performance Evaluation**:
 
@@ -1156,9 +1156,9 @@ In order to identify the best base model for the pothole detection problem, this
 - Analysis of failure cases (false positives, false negatives)  
 - Accuracy metrics relevant to conditions
 
-#### 3.7.3 Statistical Analysis Methods
+#### 3.6.3 Statistical Analysis Methods
 
-#### 3.7.3.1 Hypothesis Testing
+#### 3.6.3.1 Hypothesis Testing
 
 **For RQ1 (Severity Classification)**:
 
@@ -1170,18 +1170,18 @@ In order to identify the best base model for the pothole detection problem, this
 - **Analysis**: Correlation analysis between model size, inference speed, and accuracy  
 - **Trade-off Visualization**: Pareto frontier analysis
 
-#### 3.7.3.2 Effect Size Analysis
+#### 3.6.3.2 Effect Size Analysis
 
 - **Cohen's d**: For comparing means between groups  
 - **Interpretation**: Small (d=0.2), Medium (d=0.5), Large (d=0.8)  
 - **Practical Significance**: Beyond statistical significance, assess practical impact
 
-#### 3.7.3.3 Confidence Intervals
+#### 3.6.3.3 Confidence Intervals
 
 - **95% Confidence Intervals**: For all performance metrics  
 - **Bootstrap Resampling**: For robust confidence interval estimation (1000 iterations)
 
-#### 3.7.4 Data Analysis Tools and Software
+#### 3.6.4 Data Analysis Tools and Software
 
 - **Statistical Analysis**: Python (scipy, statsmodels), R (optional)  
 - **Visualization**: Matplotlib, Seaborn, Plotly  
@@ -1189,7 +1189,7 @@ In order to identify the best base model for the pothole detection problem, this
 - **Data Processing**: Pandas, NumPy  
 - **Reproducibility**: Jupyter Notebooks with version control
 
-#### 3.7.5 Analysis Workflow
+#### 3.6.5 Analysis Workflow
 
 1. Data preparation involves loading test datasets and creating ground truth annotations.  
 2. **Model Inference:** Apply inference to every model variant's test set.  
@@ -1201,11 +1201,11 @@ In order to identify the best base model for the pothole detection problem, this
 
 ---
 
-### 3.8 Challenges, Constraints, and Limitations
+### 3.7 Challenges, Constraints, and Limitations
 
-#### 3.8.1 Technical Challenges
+#### 3.7.1 Technical Challenges
 
-#### 3.8.1.1 Data Collection Challenges
+#### 3.7.1.1 Data Collection Challenges
 
 **Challenge 1: Diverse Environmental Conditions**
 
@@ -1217,7 +1217,7 @@ In order to identify the best base model for the pothole detection problem, this
   - Augmenting synthetic data to mimic missing circumstances  
   - Working together with various collecting crews and vehicles
 
-#### 3.8.1.2 Model Development Challenges
+#### 3.7.1.2 Model Development Challenges
 
 **Challenge 2: Severity Classification Feature Engineering**
 
@@ -1239,7 +1239,7 @@ In order to identify the best base model for the pothole detection problem, this
   - Hardware-specific optimisation (use of GPUs and NPUs)  
   - Progressive optimisation (accuracy first, then optimisation)
 
-#### 3.8.1.3 Evaluation Challenges
+#### 3.7.1.3 Evaluation Challenges
 
 **Challenge 7: Comprehensive Evaluation Across Conditions**
 
@@ -1251,9 +1251,9 @@ In order to identify the best base model for the pothole detection problem, this
   - Analysing performance differences statistically  
   - Open reporting of performance relevant to conditions
 
-#### 3.8.2 Resource Constraints
+#### 3.7.2 Resource Constraints
 
-#### 3.8.2.1 Computational Resources
+#### 3.7.2.1 Computational Resources
 
 **Constraint 1: GPU Availability and Training Time**
 
@@ -1274,7 +1274,7 @@ In order to identify the best base model for the pothole detection problem, this
   - Testing emulators and simulators for more device coverage  
   - Working along with testing services or device makers (if accessible)
 
-#### 3.8.2.2 Data Collection Resources
+#### 3.7.2.2 Data Collection Resources
 
 **Constraint 3: Data Collection Time and Personnel**
 
@@ -1296,9 +1296,9 @@ In order to identify the best base model for the pothole detection problem, this
   - Annotation with a focus on the most valuable samples  
   - Initial annotation by crowdsourcing (with expert approval)
 
-#### 3.8.3 Methodological Limitations
+#### 3.7.3 Methodological Limitations
 
-#### 3.8.3.1 Dataset Limitations
+#### 3.7.3.1 Dataset Limitations
 
 **Limitation 1: Geographic and Cultural Bias**
 
@@ -1314,7 +1314,7 @@ In order to identify the best base model for the pothole detection problem, this
 - **Recognition:** Production would require ongoing data collecting and model changes.  
 - Mitigation strategies include transfer learning from related fields and extensive data augmentation.
 
-#### 3.8.3.2 Model Limitations
+#### 3.7.3.2 Model Limitations
 
 **Limitation 3: Severity Classification Subjectivity**
 
@@ -1330,7 +1330,7 @@ In order to identify the best base model for the pothole detection problem, this
 - **Recognition:** Performance data for particular device types will be provided.  
 - **Mitigation:** Several model variations (full for high-end, lightweight for low-end).
 
-#### 3.8.3.3 Evaluation Limitations
+#### 3.7.3.3 Evaluation Limitations
 
 **Limitation 5: Limited Real-World Deployment Testing**
 
@@ -1346,9 +1346,9 @@ In order to identify the best base model for the pothole detection problem, this
 - **Acknowledgment**: This is a limitation but also reflects the novelty of the research  
 - **Mitigation**: Thorough comparison with baseline approaches from related domains
 
-#### 3.8.4 Ethical and Practical Constraints
+#### 3.7.4 Ethical and Practical Constraints
 
-#### 3.8.4.1 Privacy and Data Ethics
+#### 3.7.4.1 Privacy and Data Ethics
 
 **Constraint 1: Privacy in Image Data**
 
@@ -1360,7 +1360,7 @@ In order to identify the best base model for the pothole detection problem, this
   - adherence to data privacy laws  
   - Review and approval of ethics
 
-#### 3.8.4.2 Practical Deployment Constraints
+#### 3.7.4.2 Practical Deployment Constraints
 
 **Constraint 2: Real-World Deployment Challenges**
 
@@ -1369,9 +1369,9 @@ In order to identify the best base model for the pothole detection problem, this
 - **Recognition:** While research offers a technological basis, deployment necessitates a different implementation project.  
 - **Mitigation:** Working with possible deployment partners and taking realistic design limits into account
 
-#### 3.8.5 Risk Management and Contingency Plans
+#### 3.7.5 Risk Management and Contingency Plans
 
-#### 3.8.5.1 High-Risk Scenarios
+#### 3.7.5.1 High-Risk Scenarios
 
 **Scenario 1: Data Collection Delays or Insufficient Data**
 
@@ -1393,17 +1393,17 @@ In order to identify the best base model for the pothole detection problem, this
   - Further optimisation efforts in the future  
   - Alternative deployment techniques (edge servers, cloud inference)
 
-#### 3.8.5.2 Timeline Management
+#### 3.7.5.2 Timeline Management
 
 - **Buffer Time**: 20% buffer time built into timeline  
 - **Priority Management**: Clear prioritization of core objectives  
 - **Scope Flexibility**: Ability to reduce scope if needed while maintaining core contributions
 
-### 3.9 Expected Results and Outcome
+### 3.8 Expected Results and Outcome
 
 This section describes the anticipated contributions from this research effort as well as how the research topics will be addressed.
 
-#### 3.9.1 Expected Research Outcomes
+#### 3.8.1 Expected Research Outcomes
 
 **For RQ1 (Severity Classification):**
 
@@ -1423,7 +1423,7 @@ The research is expected to demonstrate that:
 3. **Mobile Implementation:** On mid-to-high-end mobile devices, optimised models achieve real-time inference (\>30 FPS) with respectable accuracy (mAP@0.5 \>0.85).  
 4. **Comparative Performance:** When it comes to pothole detection accuracy and inference time, YOLOv10-based models outperform YOLOv8.
 
-#### 3.9.2 Expected Contributions
+#### 3.8.2 Expected Contributions
 
 **Academic Contributions:**
 
@@ -1439,7 +1439,7 @@ The research is expected to demonstrate that:
 3. **Framework for Collaboration:** A framework for citizen-science methods of monitoring road infrastructure  
 4. **Cost-effective Solution:** An approach that increases road monitoring coverage while lowering the cost of human inspections
 
-#### 3.9.3 Implications of Results
+#### 3.8.3 Implications of Results
 
 **If Results Meet Expectations:**
 
@@ -1460,7 +1460,7 @@ The research is expected to demonstrate that:
 - Negative findings will highlight areas that need more exploration and guide future research strategies.  
 - The optimisation methods examined will yield important information on trade-offs in mobile deployment.
 
-#### 3.9.4 Answering Research Questions
+#### 3.8.4 Answering Research Questions
 
 The research questions will be answered through:
 
@@ -1471,19 +1471,19 @@ The research questions will be answered through:
 
 ---
 
-### 3.10 Model Testing and Evaluation Report {#3.10-model-testing-report}
+### 3.9 Model Testing and Evaluation Report {#3.9-model-testing-report}
 
 ""**NEW SECTION - Added December 2024**""
 
 This section reports on the testing and evaluation of the trained YOLOv10 pothole detection model, including model performance results from training, real-time application testing, and system functionality verification.
 
-#### 3.10.1 Model Training Results and Performance Metrics
+#### 3.9.1 Model Training Results and Performance Metrics
 
 ""**NEW CONTENT - Model Training Results**""
 
 The model was trained using the YOLOv10n-segmentation architecture on a dataset of 780 pothole images (720 training, 60 validation). The training process and results are documented in `model.ipynb`.
 
-##### 3.10.1.1 Training Configuration
+##### 3.9.1.1 Training Configuration
 
 - **Model Architecture**: YOLOv10n (nano variant) for segmentation
 - **Input Size**: 320x320 pixels
@@ -1494,7 +1494,7 @@ The model was trained using the YOLOv10n-segmentation architecture on a dataset 
 - **Weight Decay**: 0.0005
 - **Dataset**: 720 training images, 60 validation images
 
-##### 3.10.1.2 Training Output and Results
+##### 3.9.1.2 Training Output and Results
 
 **Model Weights Location**: `runs/segment/train/weights/best.pt`
 
@@ -1509,7 +1509,7 @@ The model was trained using the YOLOv10n-segmentation architecture on a dataset 
 **Figure Placeholder - Training Progress**:
 > **[PLACEHOLDER: Insert screenshot showing training progress, epochs, and validation metrics from model.ipynb]**
 
-##### 3.10.1.3 Model Validation Results
+##### 3.9.1.3 Model Validation Results
 
 ""**NEW CONTENT - Validation Metrics**""
 
@@ -1547,13 +1547,13 @@ The trained model was evaluated using multiple validation approaches:
 - **Recall**: [To be filled from validation results]
 - **F1-Score**: [To be filled from validation results]
 
-#### 3.10.2 Real-Time Application Testing (`main.py`)
+#### 3.9.2 Real-Time Application Testing (`main.py`)
 
 ""**NEW CONTENT - Application Testing**""
 
 The trained model was integrated into a real-time detection application (`main.py`) for testing in practical scenarios.
 
-##### 3.10.2.1 Application Architecture and Functionality
+##### 3.9.2.1 Application Architecture and Functionality
 
 **Application Overview**:
 The `main.py` file implements a Tkinter-based GUI application (`PotholeDetection` class) that provides real-time pothole detection capabilities.
@@ -1598,7 +1598,7 @@ The `main.py` file implements a Tkinter-based GUI application (`PotholeDetection
 **Figure Placeholder - Detection in Action**:
 > **[PLACEHOLDER: Insert screenshot showing real-time detection with bounding boxes displayed on video feed]**
 
-##### 3.10.2.2 Application Testing Results
+##### 3.9.2.2 Application Testing Results
 
 ""**NEW CONTENT - Testing Scenarios**""
 
@@ -1618,7 +1618,7 @@ The `main.py` file implements a Tkinter-based GUI application (`PotholeDetection
 **Figure Placeholder - Detection Statistics**:
 > **[PLACEHOLDER: Insert screenshot showing statistics panel with detection counts, saved images count, and session information]**
 
-##### 3.10.2.3 System Improvements and Bug Fixes
+##### 3.9.2.3 System Improvements and Bug Fixes
 
 ""**NEW CONTENT - System Improvements**""
 
@@ -1645,7 +1645,7 @@ During testing, several issues were identified and resolved:
    - Better handling of unsupported video formats
    - **Status**: ✅ Implemented
 
-#### 3.10.3 Notebook Organization and Documentation
+#### 3.9.3 Notebook Organization and Documentation
 
 ""**NEW CONTENT - Notebook Improvements**""
 
@@ -1658,7 +1658,7 @@ The training notebook (`model.ipynb`) was enhanced for better organization and d
 **Figure Placeholder - Notebook Structure**:
 > **[PLACEHOLDER: Insert screenshot of model.ipynb showing markdown titles and organized cell structure]**
 
-#### 3.10.4 Testing Summary and Future Work
+#### 3.9.4 Testing Summary and Future Work
 
 ""**NEW CONTENT - Testing Summary**""
 
