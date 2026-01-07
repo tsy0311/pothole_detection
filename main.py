@@ -528,7 +528,7 @@ class PotholeDetection:
             self.video_source_label.config(text=f"Source: {Path(self.video_file_path).name if self.video_file_path else 'File'}")
 
     def _select_video_file(self):
-        """Select video file for processing."""
+        """Select video file for processing and show preview."""
         file_path = filedialog.askopenfilename(
             title="Select Video File",
             filetypes=[
@@ -537,10 +537,55 @@ class PotholeDetection:
             ]
         )
         if file_path:
+            # Validate file exists
+            if not os.path.exists(file_path):
+                messagebox.showerror("Error", f"Video file not found:\n{file_path}")
+                return
+            
+            # Try to open video file for preview
+            temp_cap = cv2.VideoCapture(file_path)
+            if not temp_cap.isOpened():
+                messagebox.showerror(
+                    "Error", 
+                    f"Failed to open video file:\n{Path(file_path).name}\n\nPlease check:\n- File format is supported\n- File is not corrupted\n- Codec is available"
+                )
+                return
+            
+            # Read first frame for preview
+            ret, preview_frame = temp_cap.read()
+            if ret:
+                # Convert to RGB and create PIL Image
+                preview_frame_rgb = cv2.cvtColor(preview_frame, cv2.COLOR_BGR2RGB)
+                preview_image = Image.fromarray(preview_frame_rgb)
+                
+                # Display preview
+                self.show_video_frame(preview_image)
+                
+                # Get video info for display
+                fps = temp_cap.get(cv2.CAP_PROP_FPS)
+                frame_count = int(temp_cap.get(cv2.CAP_PROP_FRAME_COUNT))
+                duration = frame_count / fps if fps > 0 else 0
+                width = int(temp_cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+                height = int(temp_cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+                
+                # Update video source label with info
+                video_name = Path(file_path).name
+                info_text = f"Source: {video_name} ({width}x{height}, {duration:.1f}s)"
+                self.video_source_label.config(text=info_text)
+                
+                self.logger.info(f"Video preview loaded: {video_name} - {width}x{height}, {fps:.2f} FPS, {frame_count} frames")
+            else:
+                messagebox.showwarning("Warning", f"Could not read first frame from:\n{Path(file_path).name}")
+            
+            # Release temporary capture
+            temp_cap.release()
+            
+            # Set video file path and source type
             self.video_file_path = file_path
             self.video_source_type = "file"
-            self.video_source_label.config(text=f"Source: {Path(file_path).name}")
-            messagebox.showinfo("Video Selected", f"Video file selected:\n{Path(file_path).name}")
+            
+            # Show confirmation (optional, can be removed if preview is enough)
+            # messagebox.showinfo("Video Selected", f"Video file selected:\n{Path(file_path).name}\n\nClick 'Start Video' to begin processing.")
 
     def _open_results_folder(self):
         """Open results folder in file explorer."""
@@ -699,26 +744,56 @@ Developed with:
             messagebox.showwarning("Warning", "Please select a video file first.")
             return
         
-        if self.cap is None:
-            if self.video_source_type == "camera":
-                camera_index = self.config.get("camera_index", 0)
-                self.logger.info(f"Opening camera {camera_index}")
-                self.cap = cv2.VideoCapture(camera_index)
-                
-                # Set camera properties for better performance
-                self.cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
-                self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
-                self.cap.set(cv2.CAP_PROP_FPS, 30)
-            else:
-                self.logger.info(f"Opening video file: {self.video_file_path}")
-                self.cap = cv2.VideoCapture(self.video_file_path)
+        # Validate video file exists if using file source
+        if self.video_source_type == "file":
+            if not os.path.exists(self.video_file_path):
+                error_msg = f"Video file not found:\n{self.video_file_path}"
+                self.logger.error(error_msg)
+                messagebox.showerror("Error", error_msg)
+                return
+        
+        # Release existing capture if any
+        if self.cap is not None:
+            self.logger.info("Releasing existing video capture")
+            self.cap.release()
+            self.cap = None
+        
+        # Open new video source
+        if self.video_source_type == "camera":
+            camera_index = self.config.get("camera_index", 0)
+            self.logger.info(f"Opening camera {camera_index}")
+            self.cap = cv2.VideoCapture(camera_index)
             
+            # Set camera properties for better performance
+            self.cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
+            self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
+            self.cap.set(cv2.CAP_PROP_FPS, 30)
+        else:
+            self.logger.info(f"Opening video file: {self.video_file_path}")
+            self.cap = cv2.VideoCapture(self.video_file_path)
+            
+            # Validate video file can be read
             if not self.cap.isOpened():
-                error_msg = f"Failed to open {'camera' if self.video_source_type == 'camera' else 'video file'}"
+                error_msg = f"Failed to open video file:\n{self.video_file_path}\n\nPlease check:\n- File format is supported\n- File is not corrupted\n- Codec is available"
                 self.logger.error(error_msg)
                 self.status_label.config(text="● Error", fg=self.COLOR_DANGER)
                 messagebox.showerror("Error", error_msg)
+                self.cap = None
                 return
+            
+            # Get video properties for logging
+            fps = self.cap.get(cv2.CAP_PROP_FPS)
+            frame_count = self.cap.get(cv2.CAP_PROP_FRAME_COUNT)
+            width = int(self.cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+            height = int(self.cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+            self.logger.info(f"Video properties: {width}x{height}, {fps:.2f} FPS, {frame_count:.0f} frames")
+        
+        if not self.cap.isOpened():
+            error_msg = f"Failed to open {'camera' if self.video_source_type == 'camera' else 'video file'}"
+            self.logger.error(error_msg)
+            self.status_label.config(text="● Error", fg=self.COLOR_DANGER)
+            messagebox.showerror("Error", error_msg)
+            return
         
         self.video_on = True
         self.start_stop_button.configure(
@@ -738,6 +813,13 @@ Developed with:
         if self.update_id:
             self.root.after_cancel(self.update_id)
             self.update_id = None
+        
+        # Release video capture
+        if self.cap is not None:
+            self.cap.release()
+            self.cap = None
+            self.logger.info("Video capture released")
+        
         self.start_stop_button.configure(
             text="▶ Start Video", 
             bg=self.COLOR_SUCCESS, 
@@ -864,6 +946,9 @@ Developed with:
             pothole_detected = False
             current_detections = []
             
+            # Draw detections using YOLO's built-in plotting (create annotated frame first)
+            annotated_frame = results[0].plot() if results and len(results) > 0 else frame
+            
             if results and len(results) > 0:
                 result = results[0]
                 boxes = result.boxes
@@ -885,11 +970,8 @@ Developed with:
                     # Update statistics
                     if pothole_detected:
                         self.stats['total_detections'] += 1
-                        # Save if meets criteria (debouncing)
-                        self._handle_detection_saving(frame, current_detections)
-            
-            # Draw detections using YOLO's built-in plotting
-            annotated_frame = results[0].plot() if results and len(results) > 0 else frame
+                        # Save annotated frame if meets criteria (debouncing)
+                        self._handle_detection_saving(annotated_frame, current_detections)
             
             # Add FPS to frame
             fps_text = f"FPS: {self.stats['fps']:.1f}"
@@ -938,7 +1020,7 @@ Developed with:
         interval = self.config.get("update_interval_ms", 33)
         self.update_id = self.root.after(interval, self.update_video)
     
-    def _handle_detection_saving(self, frame: np.ndarray, detections: List[Dict]):
+    def _handle_detection_saving(self, annotated_frame: np.ndarray, detections: List[Dict]):
         """Handle saving detections with debouncing to prevent duplicates."""
         current_time = datetime.now()
         
@@ -955,7 +1037,7 @@ Developed with:
         
         if should_save:
             with self.save_lock:
-                self._save_detection(frame, detections)
+                self._save_detection(annotated_frame, detections)
                 self.last_save_time = current_time
                 self.last_detection_boxes = detections
     
@@ -1019,12 +1101,12 @@ Developed with:
         # Update FPS label
         self.fps_label.config(text=f"FPS: {self.stats['fps']:.1f}")
 
-    def _save_detection(self, frame, detections: List[Dict]):
-        """Save detected pothole image and coordinates."""
+    def _save_detection(self, annotated_frame: np.ndarray, detections: List[Dict]):
+        """Save detected pothole image with bounding boxes and coordinates."""
         try:
-            # Save the annotated frame
+            # Save the annotated frame (with bounding boxes drawn)
             save_path = self.save_dir / f"pothole_{self.sequence_number}.jpg"
-            success = cv2.imwrite(str(save_path), frame)
+            success = cv2.imwrite(str(save_path), annotated_frame)
             
             if not success:
                 self.logger.error(f"Failed to save image to {save_path}")
@@ -1089,10 +1171,7 @@ Developed with:
     def on_closing(self):
         """Handle window closing event."""
         self.logger.info("Closing application...")
-        self.stop_video()
-        if self.cap is not None:
-            self.cap.release()
-            self.cap = None
+        self.stop_video()  # This will release the cap
         self.logger.info("Application closed")
         self.root.destroy()
         
