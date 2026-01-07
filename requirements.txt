@@ -1,4 +1,4 @@
-# requirements
+# Pothole Detection System - Requirements
 # Usage: pip install -r requirements.txt
 
 # Base ----------------------------------------
@@ -13,12 +13,17 @@ pandas>=2.3.3
 matplotlib>=3.10.7
 seaborn>=0.13.2
 pyyaml>=6.0.3
-scipy>=1.4.1  # For sensor data preprocessing (signal processing, FFT)
+scipy>=1.4.1
 
 # Deep Learning (installed as ultralytics dependencies) -----------------
-# torch>=2.2.2
-# torchvision>=0.17.2
-# scipy>=1.16.3
+# torch>=2.2.2  # Automatically installed with ultralytics
+# torchvision>=0.17.2  # Automatically installed with ultralytics
+
+# Additional dependencies (from ultralytics) -----------------
+# These are automatically installed but listed for reference:
+# psutil>=5.8.0
+# polars>=0.20.0
+# ultralytics-thop>=2.0.18
 
 # Note: tkinter comes with Python, no need to install separately
 # For systems without tkinter, install python3-tk (Linux) or use Python installer with tkinter (Windows/macOS)
@@ -26,6 +31,5 @@ scipy>=1.4.1  # For sensor data preprocessing (signal processing, FFT)
 # Note: NumPy 2.x Compatibility
 # PyTorch 2.2.2 shows warnings with NumPy 2.x but still functions.
 # For full compatibility, you can downgrade NumPy:
-#   pip install --user --break-system-packages "numpy<2.0" --force-reinstall
-# The notebook (model.ipynb) includes automatic NumPy version management.
+#   pip install "numpy<2.0" --force-reinstall
 # All packages are at their latest versions as of the last update.
