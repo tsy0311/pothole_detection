@@ -53,6 +53,10 @@ Thumbs.db
 # Logs
 *.log
 
+# Cache files
+*.cache
+labels.cache
+
 # Model files (large)
 runs/
 *.pt

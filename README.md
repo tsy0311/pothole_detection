@@ -31,8 +31,10 @@ This project implements a **Pothole Detection System** using **YOLOv10** (You On
 - ✅ Comprehensive model evaluation (mAP, Precision, Recall, F1-Score)
 - ✅ Advanced features: TTA, ensemble prediction, hyperparameter optimization
 - ✅ GUI application for live detection
-- ✅ Video processing capabilities
+- ✅ Video processing capabilities with instant preview
 - ✅ Automatic result visualization and analysis
+- ✅ Well-documented training notebook with markdown titles
+- ✅ Fixed YOLOv10 compatibility (removed unsupported augment parameter)
 
 ---
 
@@ -194,12 +196,15 @@ Training Parameters:
    ```
 
 2. **Run Cells Sequentially**:
+   - Each code cell has a markdown title above it describing its purpose
    - Cell 0: Install dependencies
    - Cell 1: Import libraries
    - Cells 2-10: Dataset setup and validation
    - Cells 11-12: Model initialization
    - Cell 13: Start training
    - Cells 14+: Evaluation and analysis
+
+**Note**: The notebook has been updated with descriptive markdown titles above each code cell for better organization and understanding.
 
 3. **Monitor Training**:
    - Loss curves update in real-time
@@ -265,11 +270,14 @@ A Tkinter-based GUI application for real-time pothole detection.
 
 #### Features
 - Live camera feed processing
-- Real-time detection display
-- Automatic image saving on detection
+- Video file processing with preview
+- Real-time detection display with bounding boxes
+- Automatic image saving on detection (with bounding boxes)
+- Video preview when selecting files
 - GPS coordinate recording (optional)
 - Configurable confidence threshold
 - FPS monitoring
+- Improved error handling and validation
 
 #### Running the Application
 
@@ -525,5 +533,25 @@ Check the notebook's final validation cell (Cell 36) for:
 
 ---
 
-**Last Updated**: [Current Date]
-**Version**: 1.0
+**Last Updated**: December 2024
+**Version**: 1.1
+
+---
+
+## 🔄 Recent Updates (v1.1)
+
+### Application Improvements (`main.py`)
+- ✅ **Video File Processing**: Fixed issue where selected video files weren't processing
+- ✅ **Video Preview**: Added instant preview of first frame when selecting video files
+- ✅ **Bounding Box Display**: Fixed saved images to include bounding boxes (previously missing)
+- ✅ **Better Error Handling**: Improved validation and error messages for video files
+- ✅ **Video Metadata Display**: Shows video resolution and duration in source label
+
+### Notebook Improvements (`model.ipynb`)
+- ✅ **Markdown Titles**: Added descriptive markdown titles above each code cell
+- ✅ **YOLOv10 Compatibility**: Removed unsupported `augment=True` parameter (eliminated warnings)
+- ✅ **Better Organization**: Improved notebook structure with 26+ new markdown cells
+
+### Documentation
+- ✅ **README Updates**: Added recent improvements and features
+- ✅ **Testing Report**: Added `testing.md` with comprehensive research documentation
